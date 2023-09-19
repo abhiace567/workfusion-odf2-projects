@@ -52,7 +52,7 @@ pipeline {
 
                 failWhen condition: mavenVersion().endsWith('-SNAPSHOT'), message: 'Cannot deploy snapshot artifact. Fix project version in pom.xml.'
 
-                dir('invoice-aging-report-package') {
+                dir('ML-data-extraction-package') {
                     buildWithMaven configId: 'maven-settings', clean: false, goals: ['bundle:import']
                 }
             }

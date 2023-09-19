@@ -2,9 +2,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.workfusion.invoiceplane</groupId>
-    <artifactId>invoice-aging-report</artifactId>
-    <version>1.0.0</version>
+    <groupId>com.workfusion</groupId>
+    <artifactId>ML-data-extraction</artifactId>
+    <version>0.0.1</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -12,8 +12,8 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <usecase.name>invoice-aging-report</usecase.name>
-        <usecase.code>invoice-aging-report</usecase.code>
+        <usecase.name>ml-assignment</usecase.name>
+        <usecase.code>ml-assignment</usecase.code>
         <usecase.version>${project.version}</usecase.version>
         <usecase.model-version>${project.version}</usecase.model-version>
 
@@ -63,7 +63,7 @@
         <profile>
             <id>local</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
                 <workfusion.server.id>control-tower</workfusion.server.id>
@@ -73,7 +73,7 @@
         <profile>
             <id>remote</id>
             <activation>
-                <activeByDefault>false</activeByDefault>
+                <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
                 <workfusion.server.id>remote-control-tower</workfusion.server.id>
@@ -122,8 +122,8 @@
     </build>
 
   <modules>
-    <module>invoice-aging-report-bcb</module>
-    <module>invoice-aging-report-package</module>
-    <module>invoice-aging-report-test</module>
+    <module>ML-data-extraction-bcb</module>
+    <module>ML-data-extraction-package</module>
+    <module>ML-data-extraction-test</module>
   </modules>
 </project>
