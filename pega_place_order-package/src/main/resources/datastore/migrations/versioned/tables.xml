@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog ../dbchangelog-3.6.xsd">
+
+	<changeSet author="ODF2 archetype"
+		id="pegaorder_001_v0_0_1">
+		<createTable
+			tableName="uc_pegaorder_transaction_v0_0_1">
+			<column defaultValueComputed="NEWID()" name="uuid"
+				type="NVARCHAR(36)">
+				<constraints nullable="false" unique="true" />
+			</column>
+			<column name="variation_id" type="BIGINT" />
+			<column name="parent_uuid" type="NVARCHAR(36)" />
+			<column name="start_time" type="datetime2" />
+			<column name="end_time" type="datetime2" />
+			<column name="status" type="NVARCHAR(36)" />
+			<column name="error_status" type="NVARCHAR(36)" />
+			<column name="start_bp_uuid" type="NVARCHAR(36)" />
+			<column name="is_stp" type="int" />
+			<column name="split_status" type="NVARCHAR(36)" />
+		</createTable>
+	</changeSet>
+
+	<changeSet author="ODF2 archetype"
+		id="pegaorder_002_v0_0_1">
+		<createTable
+			tableName="uc_pegaorder_stage_v0_0_1">
+			<column defaultValueComputed="NEWID()" name="uuid"
+				type="NVARCHAR(36)">
+				<constraints nullable="false" unique="true" />
+			</column>
+			<column name="name" type="NVARCHAR(max)" />
+			<column name="description" type="NVARCHAR(max)" />
+			<column name="stage_order" type="INT" />
+		</createTable>
+	</changeSet>
+
+	<changeSet author="ODF2 archetype"
+		id="pegaorder_003_v0_0_1" >
+		<createTable
+			tableName="uc_pegaorder_transaction_stage_log_v0_0_1">
+			<column defaultValueComputed="NEWID()" name="uuid"
+				type="NVARCHAR(36)">
+				<constraints nullable="false" unique="true" />
+			</column>
+			<column name="stage_id" type="NVARCHAR(36)">
+				<constraints
+					foreignKeyName="fk_uc_pegaorder_transaction_stage_log_v0_0_1_uc_pegaorder_stage_v0_0_1"
+					nullable="false" referencedColumnNames="uuid"
+					referencedTableName="uc_pegaorder_stage_v0_0_1" />
+			</column>
+			<column name="transaction_uuid" type="NVARCHAR(36)">
+				<constraints
+					foreignKeyName="uc_pegaorder_transaction_stage_log_v0_0_1_uc_pegaorder_transaction_v0_0_1"
+					nullable="false" referencedColumnNames="uuid"
+					referencedTableName="uc_pegaorder_transaction_v0_0_1" />
+			</column>
+			<column name="bp_uuid" type="NVARCHAR(36)" />
+			<column name="timestamp" type="DATE" />
+			<column name="type" type="NVARCHAR(36)" />
+		</createTable>
+	</changeSet>
+
+	<!-- [item] VARCHAR(2147483647) , [type] VARCHAR(2147483647) , [quantity] -->
+	<!-- VARCHAR(2147483647) , [status] VARCHAR(2147483647) , [total_price] -->
+	<!-- VARCHAR(2147483647) , [order_id] VARCHAR(2147483647) , -->
+	<!-- [transaction_uuid] VARCHAR(48) NOT NULL , [uuid] VARCHAR(48) , PRIMARY -->
+	<!-- KEY ([uuid] -->
+	<changeSet author="ODF2 archetype"
+		id="pegaorder_004_v0_0_1">
+		<createTable
+			tableName="uc_pegaorder_orders_v0_0_1">
+			<column defaultValueComputed="NEWID()" name="uuid"
+				type="NVARCHAR(36)">
+				<constraints nullable="false" unique="true" />
+			</column>
+			<column name="transaction_uuid" type="NVARCHAR(36)">
+				<constraints
+					foreignKeyName="uc_pegaorder_orders_log_v0_0_1_uc_pegaorder_transaction_v0_0_1"
+					nullable="false" referencedColumnNames="uuid"
+					referencedTableName="uc_pegaorder_transaction_v0_0_1" />
+			</column>
+			<column name="item" type="NVARCHAR(max)" />
+			<column name="type" type="NVARCHAR(max)" />
+			<column name="quantity" type="NVARCHAR(max)" />
+			<column name="order_status" type="NVARCHAR(max)" />
+			<column name="total_price" type="NVARCHAR(max)" />
+			<column name="order_id" type="NVARCHAR(max)" />
+		</createTable>
+	</changeSet>
+
+	<changeSet author="ODF2 archetype"
+		id="pegaorder_005_v0_0_1">
+		<createTable
+			tableName="uc_pegaorder_config_v0_0_1">
+			<column defaultValueComputed="NEWID()" name="uuid"
+				type="NVARCHAR(36)">
+				<constraints nullable="false" unique="true" />
+			</column>
+			<column name="variation_id" type="BIGINT" />
+			<column name="name" type="NVARCHAR(450)">
+				<constraints nullable="false" />
+			</column>
+			<column name="value" type="NVARCHAR(max)" />
+		</createTable>
+	</changeSet>
+
+	<!-- <changeSet author="ODF2 archetype" id="uc_pega_order_ocr_cache_v0_0_1"> -->
+	<!-- <createTable tableName="uc_pega_order_ocr_cache_v0_0_1"> -->
+	<!-- <column name="cache_key" type="NVARCHAR(256)"> -->
+	<!-- <constraints nullable="false" unique="true"/> -->
+	<!-- </column> -->
+	<!-- <column name="document_xml_link" type="NVARCHAR(2048)"/> -->
+	<!-- <column name="pages" type="INT"/> -->
+	<!-- <column name="meta_info_pages" type="NVARCHAR(max)"/> -->
+	<!-- <column name="meta_info_xml_url" type="NVARCHAR(2048)"/> -->
+	<!-- <column name="creation_time" type="NVARCHAR(256)"/> -->
+	<!-- </createTable> -->
+	<!-- </changeSet> -->
+
+</databaseChangeLog>

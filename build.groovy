@@ -52,7 +52,7 @@ pipeline {
 
                 failWhen condition: mavenVersion().endsWith('-SNAPSHOT'), message: 'Cannot deploy snapshot artifact. Fix project version in pom.xml.'
 
-                dir('scrape-wellsfargo-locations-package') {
+                dir('pega_place_order-package') {
                     buildWithMaven configId: 'maven-settings', clean: false, goals: ['bundle:import']
                 }
             }
